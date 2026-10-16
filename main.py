@@ -98,20 +98,4 @@ kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
 cluster_labels = kmeans.fit_predict(X_scaled)
 df['cluster_raw'] = cluster_labels
 
-# 기호 정의 (최대 7개까지 확장: ㉮, ㉯, ㉰, ㉱, ㉲, ㉳, ㉴)
-all_labels_kor = ['㉮', '㉯', '㉰', '㉱', '㉲', '㉳', '㉴']
-current_labels_kor = all_labels_kor[:n_clusters]
-
-# 누적 관객(total_audi) 평균이 큰 묶음부터 순서대로 기호 부여
-cluster_audi_mean = df.groupby('cluster_raw')['total_audi'].mean().sort_values(ascending=False)
-cluster_mapping = {}
-for rank, cluster_id in enumerate(cluster_audi_mean.index):
-    cluster_mapping[cluster_id] = current_labels_kor[rank]
-
-df['묶음'] = df['cluster_raw'].map(cluster_mapping)
-
-st.divider()
-
-# 5. 2차원 산점도
-st.subheader("3. 2차원 산점도")
-col2
+# 기호 정의 (
